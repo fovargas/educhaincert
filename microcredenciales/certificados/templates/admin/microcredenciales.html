@@ -1,0 +1,26 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <h1>Panel de Administración de Microcredenciales</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for microcredencial in microcredenciales %}
+        <tr>
+          <td>{{ microcredencial.id }}</td>
+          <td>{{ microcredencial.nombre }}</td>
+          <td>
+            <a href="{% url 'emitir_microcredencial' microcredencial.id %}">Emitir</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
