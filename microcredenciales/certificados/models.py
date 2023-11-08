@@ -1,8 +1,27 @@
+import subprocess,os
 from django.db import models
 
 class Universidad(models.Model):
     nombre = models.CharField(max_length=255)
-    # Otros campos relevantes
+    did = models.CharField(max_length=255, blank=True, null=True)
+    logo = models.ImageField(upload_to='logos_universidades/')
+
+    
+
+    def __str__(self):
+        return self.nombre
+    
+    def save(self, *args, **kwargs):
+        os.chdir('../veramo')
+        comando = "npx veramo did generate -i 'did:key' -k 'local' -a 'nasa'"
+
+        # Si la universidad es nueva y no tiene DID
+        if not self.did:
+            # Ejecutar el comando para generar DID
+            resultado = subprocess.run(comando, shell=True, capture_output=True, text=True, cwd = os.getcwd())
+            # Capturar la salida del comando y almacenarla en el campo DID
+            self.did = resultado.stdout.strip()
+        super().save(*args, **kwargs)
 
 class Estudiante(models.Model):
     nombre = models.CharField(max_length=255)
