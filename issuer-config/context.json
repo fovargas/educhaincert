@@ -2,7 +2,7 @@
 	"@context": {
 		"id": "@id",
 		"type": "@type",
-		"mccu": "https://github.com/fovargas/blockcertsutpl/edit/main/config/context.json",
+		"mccu": "https://raw.githubusercontent.com/fovargas/blockutpl/main/issuer-config/context.json",
 		"MCCUCredential": "mccu:MCCUCredential",
 		"vivo": "http://vivoweb.org/ontology/core#",
         "org": "https://www.w3.org/ns/org#",
