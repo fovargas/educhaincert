@@ -1,19 +1,40 @@
-# blockutpl
+# Proyecto: Modelo de gestión descentralizada para la emisión y verificación de microcredenciales
 
-Modificaciones en archivos base:
+Este proyecto se enfoca en el desarrollo de un modelo de gestión descentralizada para la emisión y verificación de microcredenciales, utilizando tecnologías de cadena de bloques.
 
+## Lenguaje de Programación
 
-blockutpl/venv/lib/python3.8/site-packages/cert_tools/helpers.py
+El proyecto está desarrollado en **Python**, un lenguaje de programación versátil y ampliamente utilizado.
 
-def create_iso8601_tz():
-    ret = datetime.now(timezone.utc).isoformat()[:-13]+'Z'
-    return ret.isoformat()
+## Librerías Utilizadas
 
-def create_iso8601_tz():
-    return datetime.now(timezone.utc).isoformat()[:-13]+'Z'
+Las siguientes librerías de Python se han utilizado en este proyecto:
 
-blockutpl/venv/lib/python3.8/site-packages/cert_tools/instantiate_v3_certificate_batch.py
-def instantiate_recipient(cert, recipient, additional_fields):
-    cert['credentialSubject']['id'] = recipient.pubkey
-    cert['credentialSubject']['name'] = recipient.name +++
-    cert['credentialSubject']['email'] = recipient.identity +++
+- **Django**: Un framework de alto nivel para el desarrollo web.
+- **Cert-tools**: Herramientas para crear plantillas de certificados.
+- **Cert-Issuer**: Para emitir certificados en la blockchain.
+- **Veramo**: Facilita la interacción con identidades y verificaciones descentralizadas.
+- **IPFS (InterPlanetary File System)**: Un protocolo y red de pares para almacenar y compartir datos en un sistema de archivos distribuido.
+
+## Comandos Utilizados
+
+### Generar una Plantilla de Certificados
+
+```bash
+create-certificate-template --my-config conf-cert-tools.ini
+```
+
+### Crear Certificados sin Firmar a partir de un archivo roster (CSV):
+
+```bash
+instantiate-certificate-batch -c conf-cert-tools.ini
+```
+
+### Firmar Lotes de Certificados
+
+Para certificados ubicados en projectpath/cert-config/data/unsigned_certificates
+
+```bash
+cert-issuer -c conf-cert-issuer.ini
+```
+
