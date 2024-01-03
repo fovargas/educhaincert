@@ -1,0 +1,68 @@
+{
+	"@context": {
+		"id": "@id",
+		"type": "@type",
+		"mccu": "https://github.com/fovargas/blockcertsutpl/edit/main/config/context.json",
+		"MCCUCredential": "mccu:MCCUCredential",
+		"vivo": "http://vivoweb.org/ontology/core#",
+        "org": "https://www.w3.org/ns/org#",
+        "foaf": "http://xmlns.com/foaf/0.1/",
+        "schema": "http://schema.org/",
+        "cs2013": "http://ontologies.utpl.edu.ec/project/CS2013/schema#",
+		"Issuer": "mccu:Issuer",
+        "Person": "vivo:Person",
+		"Student": "vivo:Student",
+		"Instructor": "schema:Instructor",
+		"Organization": "foaf:Organization",
+		"University": "vivo:University",
+		"Consortium": "vivo:Consortium",
+		"OrganizationalUnit": "vivo:AcademicDepartment",
+		"Course": "vivo:Course",
+		"LearningPath": "mccu:LearningPath",
+		"LearningOutcome": "cs2013:LearningOutcome",
+		"LevelOfMastery": "cs2013:LevelOfMastery",
+		"Credential": "vivo:Credential",
+		"Microcredential": "mccu:Microcredential",
+		"OpenBadge": "mccu:OpenBadge",
+		"credential": {
+			"@id": "mccu:credential",
+			"@type": "@id"
+		},
+		"memberOf": {
+			"@id": "schema:memberOf",
+			"@type": "@id"
+		},
+		"subOrganizationOf": {
+			"@id": "org:subOrganizationOf",
+			"@type": "@id"
+		},
+		"holdsAccount": {
+			"@id": "vivo:holdsAccount",
+			"@type": "@id"
+		},
+		"hasCourseOffering": {
+			"@id": "mccu:hasCourseOffering",
+			"@type": "@id"
+		},
+		"hasCourseInstructor": {
+			"@id": "vivo:hasCourseInstructor",
+			"@type": "@id"
+		},
+		"hasPrerequisite": {
+			"@id": "mccu:hasPrerequisite",
+			"@type": "@id"
+		},
+		"isPartOf": {
+			"@id": "mccu:isPartOf",
+			"@type": "@id"
+		},
+		"hasLearningOutcome": {
+			"@id": "cs2013:hasLearningOutcome",
+			"@type": "@id"
+		},
+		"hasLevelOfMastery": {
+			"@id": "cs2013:hasLevelOfMastery",
+			"@type": "@id"
+		}
+	}
+}

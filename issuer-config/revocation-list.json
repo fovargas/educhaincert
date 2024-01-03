@@ -1,0 +1,11 @@
+{
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://w3id.org/blockcerts/v3",
+        "https://www.w3.org/2018/credentials/examples/v1"
+    ],
+    "id": "https://raw.githubusercontent.com/fovargas/blockutpl/main/issuer-config/revocation-list.json",
+    "type": "RevocationList",
+    "issuer": "https://raw.githubusercontent.com/fovargas/blockutpl/main/issuer-config/profile.json",
+    "revokedAssertions": []
+}
