@@ -8,7 +8,7 @@
 		"foaf": "http://xmlns.cm/foaf/0.1/",
 		"schema": "http://schema.org/",
 		"cs2013": "http://ontologies.utpl.edu.ec/project/CS2013/schema#",
-    "MCCUCredential": "mccu:MCCUCredential",
+		"MCCUCredential": "mccu:MCCUCredential",
 		"Issuer": "mccu:Issuer",
 		"Person": "vivo:Person",
 		"Student": "vivo:Student",
