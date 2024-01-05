@@ -2,66 +2,62 @@
 	"@context": {
 		"id": "@id",
 		"type": "@type",
-		"mccu": "https://raw.githubusercontent.com/fovargas/blockutpl/main/issuer-config/mccu-context.json",
-		"MCCUCredential": "mccu:MCCUCredential",
+		"mccu": "https://github.com/fovargas/blockcertsutpl/edit/main/config/context.json",
+		"MCCUCredential": "bc:MCCUCredential",
 		"vivo": "http://vivoweb.org/ontology/core#",
-		"org": "https://www.w3.org/ns/org#",
-		"foaf": "http://xmlns.com/foaf/0.1/",
-		"schema": "http://schema.org/",
-		"cs2013": "http://ontologies.utpl.edu.ec/project/CS2013/schema#",
-		"Issuer": "mccu:Issuer",
 		"Person": "vivo:Person",
-		"Student": "vivo:Student",
-		"Instructor": "schema:Instructor",
-		"Organization": "foaf:Organization",
-		"University": "vivo:University",
-		"Consortium": "vivo:Consortium",
-		"OrganizationalUnit": "vivo:AcademicDepartment",
+		"Issuer": "http://example.org/ontology/Issuer",
+		"Student": "http://example.org/ontology/Student",
+		"Instructor": "http://example.org/ontology/Instructor",
+		"Organization": "http://example.org/ontology/Organization",
+		"University": "http://example.org/ontology/University",
+		"Consortium": "http://example.org/ontology/Consortium",
+		"OrganizationalUnit": "http://example.org/ontology/OrganizationalUnit",
 		"Course": "vivo:Course",
-		"LearningPath": "mccu:LearningPath",
-		"LearningOutcome": "cs2013:LearningOutcome",
-		"LevelOfMastery": "cs2013:LevelOfMastery",
-		"Credential": "vivo:Credential",
-		"Microcredential": "mccu:Microcredential",
-		"OpenBadge": "mccu:OpenBadge",
+		"LearningPath": "http://example.org/ontology/LearningPath",
+		"LearningOutcome": "http://example.org/ontology/LearningOutcome",
+		"LevelOfMastery": "http://example.org/ontology/LevelOfMastery",
+		"Credential": "http://example.org/ontology/Credential",
+		"Microcredential": "http://example.org/ontology/Microcredential",
+		"OpenBadge": "http://example.org/ontology/OpenBadge",
 		"credential": {
-			"@id": "mccu:credential",
+			"@id": "http://example.org/ontology/credential",
 			"@type": "@id"
 		},
 		"memberOf": {
-			"@id": "schema:memberOf",
+			"@id": "http://example.org/ontology/memberOf",
 			"@type": "@id"
 		},
 		"subOrganizationOf": {
-			"@id": "org:subOrganizationOf",
+			"@id": "http://example.org/ontology/subOrganizationOf",
 			"@type": "@id"
 		},
 		"holdsAccount": {
-			"@id": "vivo:holdsAccount",
+			"@id": "http://example.org/ontology/holdsAccount",
 			"@type": "@id"
 		},
 		"hasCourseOffering": {
-			"@id": "mccu:hasCourseOffering",
+			"@id": "http://example.org/ontology/hasCourseOffering",
 			"@type": "@id"
 		},
 		"hasCourseInstructor": {
-			"@id": "vivo:hasCourseInstructor",
+			"@id": "http://example.org/ontology/hasCourseInstructor",
 			"@type": "@id"
 		},
 		"hasPrerequisite": {
-			"@id": "mccu:hasPrerequisite",
+			"@id": "http://example.org/ontology/hasPrerequisite",
 			"@type": "@id"
 		},
 		"isPartOf": {
-			"@id": "mccu:isPartOf",
+			"@id": "http://example.org/ontology/isPartOf",
 			"@type": "@id"
 		},
 		"hasLearningOutcome": {
-			"@id": "cs2013:hasLearningOutcome",
+			"@id": "http://example.org/ontology/hasLearningOutcome",
 			"@type": "@id"
 		},
 		"hasLevelOfMastery": {
-			"@id": "cs2013:hasLevelOfMastery",
+			"@id": "http://example.org/ontology/hasLevelOfMastery",
 			"@type": "@id"
 		}
 	}
