@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
   <h1>Panel de Administración de Microcredenciales</h1>
@@ -15,7 +15,7 @@
       {% for microcredencial in microcredenciales %}
         <tr>
           <td>{{ microcredencial.id }}</td>
-          <td>{{ microcredencial.nombre }}</td>
+          <td>{{ microcredencial.nombre }}sss</td>
           <td>
             <a href="{% url 'emitir_microcredencial' microcredencial.id %}">Emitir</a>
           </td>

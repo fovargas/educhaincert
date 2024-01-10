@@ -8,7 +8,8 @@ from .forms import LoginForm
 
 def lista_microcredenciales(request):
     microcredenciales = Microcredencial.objects.all()
-    return HttpResponse(', '.join([m.titulo for m in microcredenciales]))
+    context = {'microcredenciales': microcredenciales}
+    return render(request, 'microcredenciales/microcredenciales.html', context)
 
 def admin_microcredenciales(request):
     microcredenciales = Microcredencial.objects.all()

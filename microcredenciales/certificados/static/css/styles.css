@@ -1,0 +1,33 @@
+body,
+html,
+main {
+    height: 100%;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+nav.header {
+    background-color: #002860;
+    width: 100%;
+    text-align: center;
+    color: white;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 1.5em 0em;
+}
+
+footer {
+    width: 100%;
+    background-color: #002860;
+    text-align: center !important;
+    padding: 2.5em 0em;
+    color: white;
+    margin-top: auto;
+}
