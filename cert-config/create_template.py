@@ -10,12 +10,9 @@ from cert_tools import jsonpath_helpers
 
 from cert_schema import BLOCKCERTS_V3_CONTEXT, VERIFIABLE_CREDENTIAL_V1_CONTEXT
 
-from cert_tools import create_v3_certificate_template as ct
-
-
 def create_credential_subject_section():
     return {
-        'id': "ecdsa-koblitz-pubkey:*|PUBKEY|*",
+        'id': "*|PUBKEY|*",
     }
 
 def create_credential_display_section():
@@ -29,7 +26,7 @@ def create_v3_assertion(config):
         '@context': [
             VERIFIABLE_CREDENTIAL_V1_CONTEXT,
             BLOCKCERTS_V3_CONTEXT,
-            'https://raw.githubusercontent.com/fovargas/blockutpl/main/issuer-config/context.json'  # example subjectCredential type if not overridden
+            'https://raw.githubusercontent.com/fovargas/blockutpl/main/issuer-config/context.json'
         ],
         'type': ["VerifiableCredential", "BlockcertsCredential", "MCCUCredential"],
         "issuer": config.issuer_id,
@@ -96,7 +93,7 @@ def get_config():
 
 def main():
     conf = get_config()
-    ct.write_certificate_template(conf)
+    write_certificate_template(conf)
     print('Created template!')
 
 if __name__ == "__main__":
