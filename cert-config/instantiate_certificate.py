@@ -116,16 +116,16 @@ def get_recipients_from_database(config, db_config):
                     cur.resultado_aprendizaje AS learning_outcome,
                     cur.nombre AS course
                 FROM
-                    certificados_participacioncurso p
-                    JOIN certificados_estudiante est ON p.estudiante_id = est.id
-                    JOIN certificados_ofertaacademica oa ON p.oferta_academica_id = oa.id
-                    JOIN certificados_curso cur ON oa.curso_id = cur.id
-                    JOIN certificados_instructor inst ON oa.instructor_id = inst.id
-                    JOIN certificados_unidadorganizativa uo ON cur.unidad_organizativa_id = uo.id
-                    JOIN certificados_rutaaprendizaje rap ON cur.ruta_aprendizaje_id = rap.id
-                    JOIN certificados_universidad uni ON rap.universidad_id = uni.id
-                    JOIN certificados_niveldemaestria nm ON cur.nivel_maestria_id = nm.id
-                    LEFT JOIN certificados_microcredencial m ON p.id = m.participacion_curso_id
+                    educhaincertapp_participacioncurso p
+                    JOIN educhaincertapp_estudiante est ON p.estudiante_id = est.id
+                    JOIN educhaincertapp_ofertaacademica oa ON p.oferta_academica_id = oa.id
+                    JOIN educhaincertapp_curso cur ON oa.curso_id = cur.id
+                    JOIN educhaincertapp_instructor inst ON oa.instructor_id = inst.id
+                    JOIN educhaincertapp_unidadorganizativa uo ON cur.unidad_organizativa_id = uo.id
+                    JOIN educhaincertapp_rutaaprendizaje rap ON cur.ruta_aprendizaje_id = rap.id
+                    JOIN educhaincertapp_universidad uni ON rap.universidad_id = uni.id
+                    JOIN educhaincertapp_niveldemaestria nm ON cur.nivel_maestria_id = nm.id
+                    LEFT JOIN educhaincertapp_microcredencial m ON p.id = m.participacion_curso_id
                 WHERE m.participacion_curso_id IS NULL AND p.oferta_academica_id = %s AND p.estado = 'APROBADO';
             """
             cursor.execute(query, (config.oferta_academica_id,))
@@ -154,7 +154,7 @@ def insertar_microcredencial(db_config, uuid, participation_id, issued_on):
 
             # Consulta SQL para insertar un nuevo registro
             query = """
-            INSERT INTO certificados_microcredencial (participacion_curso_id, estado, fecha_emision, uuid)
+            INSERT INTO educhaincertapp_microcredencial (participacion_curso_id, estado, fecha_emision, uuid)
             VALUES (%s,'SIN FIRMAR',%s,%s)
             """
             cursor.execute(query, (participation_id, issued_on, uuid))
