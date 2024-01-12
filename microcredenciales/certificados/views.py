@@ -1,9 +1,8 @@
+import subprocess
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .models import Microcredencial
-
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 from .forms import LoginForm
 
 def lista_microcredenciales(request):
@@ -14,10 +13,6 @@ def lista_microcredenciales(request):
 def admin_microcredenciales(request):
     microcredenciales = Microcredencial.objects.all()
     return render(request, 'admin/microcredenciales.html', {'microcredenciales': microcredenciales})
-
-def emitir_microcredencial(request, microcredencial_id):
-    # Aquí iría el código para emitir la microcredencial
-    return redirect('admin_microcredenciales')
 
 def login_view(request):
     if request.method == 'POST':
@@ -32,3 +27,10 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
+
+def descargar_archivo(id_microcredencial):
+    microcredencial = Microcredencial.objects.get(id=id_microcredencial)
+    comando = subprocess.run(['ipfs', 'cat', microcredencial.ipfs_hash], stdout=subprocess.PIPE)
+    response = HttpResponse(comando.stdout, content_type='application/octet-stream')
+    response['Content-Disposition'] = 'attachment; filename="' + microcredencial.ipfs_hash + '.json"'
+    return response

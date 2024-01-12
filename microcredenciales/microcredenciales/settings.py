@@ -14,7 +14,8 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
+CERT_CONFIG_DIR = Path(__file__).resolve().parent.parent.parent / 'cert-config'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'microcredenciales.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blockutpl',
+        'NAME': 'educhaincert',
         'USER': 'utpl',
         'PASSWORD': 'utpl',
         'HOST': 'localhost',  # O la IP del servidor de la base de datos si es remoto
@@ -108,9 +109,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-es'
+LANGUAGE_CODE = 'es-ec'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Guayaquil'
 
 USE_I18N = True
 

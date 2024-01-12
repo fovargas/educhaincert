@@ -6,47 +6,51 @@ class Universidad(models.Model):
     did = models.CharField(max_length=255, blank=True, null=True, editable=False)
     logo = models.ImageField(upload_to='logos_universidades/')
 
-    def __str__(self):
-        return self.nombre
+    class Meta:
+        verbose_name_plural = "universidades"
     
     def save(self, *args, **kwargs):
         os.chdir('../veramo')
         comando = "npx veramo did generate -i 'did:key' -k 'local' -a '"+self.nombre+"'"
 
-        # Si la universidad es nueva y no tiene DID
         if not self.did:
-            # Ejecutar el comando para generar DID
             resultado = subprocess.run(comando, shell=True, capture_output=True, text=True, cwd = os.getcwd())
-            # Capturar la salida del comando y almacenarla en el campo DID
             self.did = resultado.stdout.strip()
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return self.nombre
+    
 class UnidadOrganizativa(models.Model):
     universidad = models.ForeignKey(Universidad, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255)
     did = models.CharField(max_length=255, blank=True, null=True, editable=False)
 
-    def __str__(self):
-        return self.universidad.nombre+" - "+self.nombre
+    class Meta:
+        verbose_name_plural = "unidades organizativas"
     
     def save(self, *args, **kwargs):
 
-        universidad = Universidad.objects.get(id=self.universidad.pk)  # Obtiene un libro específico
+        universidad = Universidad.objects.get(id=self.universidad.pk)
         universidad_nombre = universidad.nombre
 
         os.chdir('../veramo')
         comando = "npx veramo did generate -i 'did:key' -k 'local' -a '"+universidad_nombre+" - "+self.nombre+"'"
 
-        # Si la unidad organizativa es nueva y no tiene DID
         if not self.did:
-            # Ejecutar el comando para generar DID
             resultado = subprocess.run(comando, shell=True, capture_output=True, text=True, cwd = os.getcwd())
-            # Capturar la salida del comando y almacenarla en el campo DID
             self.did = resultado.stdout.strip()
         super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.universidad.nombre+" - "+self.nombre
 
 class NivelDeMaestria(models.Model):
     nombre = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "nivel de maestría"
+        verbose_name_plural = "niveles de maestría"
 
     def __str__(self):
         return self.nombre
@@ -61,11 +65,8 @@ class Estudiante(models.Model):
         os.chdir('../veramo')
         comando = "npx veramo did generate -i 'did:key' -k 'local' -a '"+self.identificacion+"'"
 
-        # Si la universidad es nueva y no tiene DID
         if not self.did:
-            # Ejecutar el comando para generar DID
             resultado = subprocess.run(comando, shell=True, capture_output=True, text=True, cwd = os.getcwd())
-            # Capturar la salida del comando y almacenarla en el campo DID
             self.did = resultado.stdout.strip()
         super().save(*args, **kwargs)
 
@@ -78,25 +79,31 @@ class Instructor(models.Model):
     email = models.EmailField(unique=True)
     did = models.CharField(max_length=255, blank=True, null=True, editable=False)
 
+    class Meta:
+        verbose_name_plural = "instructores"
+    
     def save(self, *args, **kwargs):
         os.chdir('../veramo')
         comando = "npx veramo did generate -i 'did:key' -k 'local' -a '"+self.identificacion+"'"
 
-        # Si la universidad es nueva y no tiene DID
         if not self.did:
-            # Ejecutar el comando para generar DID
             resultado = subprocess.run(comando, shell=True, capture_output=True, text=True, cwd = os.getcwd())
-            # Capturar la salida del comando y almacenarla en el campo DID
             self.did = resultado.stdout.strip()
         super().save(*args, **kwargs)
 
     def __str__(self):
         return self.nombre
     
+    
+    
 class RutaAprendizaje(models.Model):
     nombre = models.CharField(max_length=255)
     descripcion = models.TextField(max_length=1024)
     universidad = models.ForeignKey(Universidad, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "ruta de aprendizaje"
+        verbose_name_plural = "rutas de aprendizaje"
 
     def __str__(self):
         return self.nombre
@@ -117,7 +124,11 @@ class OfertaAcademica(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     periodo = models.CharField(max_length=255)
-
+    
+    class Meta:
+        verbose_name = "oferta académica"
+        verbose_name_plural = "ofertas académicas"
+    
     def __str__(self):
         return self.curso.nombre+" - "+self.periodo
     
@@ -134,14 +145,23 @@ class ParticipacionCurso(models.Model):
     calificacion = models.FloatField(blank=True, null=True)
     estado = models.CharField(max_length=255, blank=True, null=True, choices=estados)
 
+    class Meta:
+        verbose_name = "participante"
+        verbose_name_plural = "participantes"
+    
     def __str__(self):
         return self.estudiante.nombre+" - "+self.oferta_academica.curso.nombre+" - "+self.oferta_academica.periodo
 
 class Microcredencial(models.Model):
-    universidad = models.ForeignKey(Universidad, on_delete=models.CASCADE)
-    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
-    inscripcion = models.ForeignKey(ParticipacionCurso, on_delete=models.CASCADE)
-    fecha_emision = models.DateField(blank=True, null=True)
+    participacion_curso = models.ForeignKey(ParticipacionCurso, on_delete=models.CASCADE)
+    fecha_emision = models.DateTimeField(blank=True, null=True)
+    fecha_firma = models.DateTimeField(blank=True, null=True)
+    uuid = models.CharField(max_length=255, blank=True, null=True)
+    ipfs_hash = models.CharField(max_length=255, blank=True, null=True)
+    estado = models.CharField(max_length=255, blank=True, null=True)
 
+    class Meta:
+        verbose_name_plural = "microcredenciales"
+    
     def __str__(self):
-        return self.estudiante.nombre+" - "+self.oferta_academica.curso.nombre+" - "+self.oferta_academica.periodo
+        return self.participacion_curso.estudiante.nombre+" - "+self.participacion_curso.oferta_academica.curso.nombre+" - "+self.participacion_curso.oferta_academica.periodo

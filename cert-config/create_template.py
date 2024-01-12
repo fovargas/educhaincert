@@ -26,7 +26,7 @@ def create_v3_assertion(config):
         '@context': [
             VERIFIABLE_CREDENTIAL_V1_CONTEXT,
             BLOCKCERTS_V3_CONTEXT,
-            'https://raw.githubusercontent.com/fovargas/blockutpl/main/issuer-config/context.json'
+            'https://raw.githubusercontent.com/fovargas/educhaincert/main/issuer-config/context.json'
         ],
         'type': ["VerifiableCredential", "BlockcertsCredential", "MCCUCredential"],
         "issuer": config.issuer_id,

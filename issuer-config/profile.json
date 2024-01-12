@@ -5,11 +5,11 @@
         "https://www.w3.org/2018/credentials/examples/v1"
     ],
     "type": "Profile",
-    "id": "https://raw.githubusercontent.com/fovargas/blockutpl/main/issuer-config/profile.json",
+    "id": "https://raw.githubusercontent.com/fovargas/educhaincert/main/issuer-config/profile.json",
     "name": "Universidad Técnica Particular de Loja",
     "url": "https://www.utpl.edu.ec",
     "introductionURL": "https://www.utpl.edu.ec",
-    "revocationList": "https://raw.githubusercontent.com/fovargas/blockutpl/main/issuer-config/revocation-list.json",
+    "revocationList": "https://raw.githubusercontent.com/fovargas/educhaincert/main/issuer-config/revocation-list.json",
     "publicKey": [
       {
         "id": "ecdsa-koblitz-pubkey:n1imWyPApXo1StroN2R7xwnKmSufPQDbi6",
