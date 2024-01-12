@@ -28,7 +28,7 @@ def create_v3_assertion(config):
             BLOCKCERTS_V3_CONTEXT,
             'https://raw.githubusercontent.com/fovargas/educhaincert/main/issuer-config/context.json'
         ],
-        'type': ["VerifiableCredential", "BlockcertsCredential", "MCCUCredential"],
+        'type': ["VerifiableCredential", "BlockcertsCredential", "EDUONTOCredential"],
         "issuer": config.issuer_id,
         'issuanceDate': '*|DATE|*',
         'id': helpers.URN_UUID_PREFIX + '*|CERTUID|*'

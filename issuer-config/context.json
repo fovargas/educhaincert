@@ -2,14 +2,14 @@
 	"@context": {
 		"id": "@id",
 		"type": "@type",
-		"mccu": "https://ontologies.utpl.edu.ec/project/mccu/schema#",
+		"eduonto": "https://ontologies.utpl.edu.ec/project/eduonto/schema#",
 		"vivo": "http://vivoweb.org/ontology/core#",
 		"org": "https://www.w3.org/ns/org#",
 		"foaf": "http://xmlns.com/foaf/0.1/",
 		"schema": "https://schema.org/",
 		"cs2013": "https://ontologies.utpl.edu.ec/project/CS2013/schema#",
-		"MCCUCredential": "mccu:MCCUCredential",
-		"Issuer": "mccu:Issuer",
+		"EDUONTOCredential": "eduonto:EDUONTOCredential",
+		"Issuer": "eduonto:Issuer",
 		"Person": "vivo:Person",
 		"Student": "vivo:Student",
 		"Instructor": "schema:Instructor",
@@ -18,14 +18,14 @@
 		"Consortium": "vivo:Consortium",
 		"OrganizationalUnit": "vivo:AcademicDepartment",
 		"Course": "vivo:Course",
-		"LearningPath": "mccu:LearningPath",
+		"LearningPath": "eduonto:LearningPath",
 		"LearningOutcome": "cs2013:LearningOutcome",
 		"LevelOfMastery": "cs2013:LevelOfMastery",
 		"Credential": "vivo:Credential",
-		"Microcredential": "mccu:Microcredential",
-		"OpenBadge": "mccu:OpenBadge",
+		"Microcredential": "eduonto:Microcredential",
+		"OpenBadge": "eduonto:OpenBadge",
 		"credential": {
-			"@id": "mccu:credential",
+			"@id": "eduonto:credential",
 			"@type": "@id"
 		},
 		"memberOf": {
@@ -41,7 +41,7 @@
 			"@type": "@id"
 		},
 		"hasCourseOffering": {
-			"@id": "mccu:hasCourseOffering",
+			"@id": "eduonto:hasCourseOffering",
 			"@type": "@id"
 		},
 		"hasCourseInstructor": {
@@ -49,11 +49,11 @@
 			"@type": "@id"
 		},
 		"hasPrerequisite": {
-			"@id": "mccu:hasPrerequisite",
+			"@id": "eduonto:hasPrerequisite",
 			"@type": "@id"
 		},
 		"isPartOf": {
-			"@id": "mccu:isPartOf",
+			"@id": "eduonto:isPartOf",
 			"@type": "@id"
 		},
 		"hasLearningOutcome": {
