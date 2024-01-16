@@ -114,19 +114,20 @@ class OfertaAcademicaInline(admin.TabularInline):
 
 class UnidadOrganizativaInline(admin.TabularInline):
     model = UnidadOrganizativa
+    readonly_fields = ['did']
     extra = 1
 
 class UniversidadAdmin(admin.ModelAdmin):
     
-    def ver_unidades_organizativas(self, obj):
-        count = obj.unidadorganizativa_set.count()
-        url = reverse('admin:educhaincertapp_unidadorganizativa_changelist') + f'?universidad__id__exact={obj.id}'
-        return format_html('<a href="{}">{} unidades Organizativas</a>', url, count)
-    
-    list_display = ['nombre', 'ver_unidades_organizativas']
+    # def ver_unidades_organizativas(self, obj):
+    #     count = obj.unidadorganizativa_set.count()
+    #     url = reverse('admin:educhaincertapp_unidadorganizativa_changelist') + f'?universidad__id__exact={obj.id}'
+    #     return format_html('<a href="{}">{} unidades Organizativas</a>', url, count)
+    #ver_unidades_organizativas.short_description = 'Unidades Organizativas'
+
+    #list_display = ['nombre', 'ver_unidades_organizativas']
+    inlines = [UnidadOrganizativaInline]
     readonly_fields = ['did']
-    
-    ver_unidades_organizativas.short_description = 'Unidades Organizativas'
 
 class OfertaAcademicaAdmin(admin.ModelAdmin):
 
@@ -155,7 +156,7 @@ class ParticipacionCursoAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         if 'action' in request.POST:
-            if request.POST['action'] == 'generar_educhaincertapp_sin_firmar':
+            if request.POST['action'] == 'generar_certificados_sin_firmar':
                 if not request.POST.getlist(ACTION_CHECKBOX_NAME):
                     self.model.objects.all()
                     generar_certificados_sin_firmar(request)
@@ -185,19 +186,20 @@ class MicrocredencialAdmin(admin.ModelAdmin):
     def mostrar_microcredenciales(self, obj):
         return str(obj)
 
-    def descargar_archivo(self, obj):
+    def descargar_archivo_ipfs(self, obj):
         if obj.ipfs_hash == None:
             return format_html('<p class="disabled">No disponible</p>')
         else:
+            print(obj.id)
             return format_html('<a href="{}" class="button">Descargar</a>', reverse('descargar_archivo', args=[obj.id]))
 
-    list_display = [ 'mostrar_microcredenciales','descargar_archivo'] 
+    list_display = [ 'mostrar_microcredenciales','descargar_archivo_ipfs'] 
     readonly_fields = ['fecha_emision','fecha_firma','uuid','ipfs_hash','estado']
 
     mostrar_microcredenciales.short_description = 'Lista de microcredenciales'
 
-    descargar_archivo.short_description = 'Descarga'
-    descargar_archivo.allow_tags = True
+    descargar_archivo_ipfs.short_description = 'Descarga'
+    descargar_archivo_ipfs.allow_tags = True
 
 class CursoAdmin(admin.ModelAdmin):
 
@@ -217,7 +219,7 @@ generar_certificados_sin_firmar.short_description = 'Generar certificados sin fi
 firmar_certificados_pendientes.short_description = 'Firmar certificados pendientes'
 
 admin.site.register(Universidad, UniversidadAdmin)
-admin.site.register(UnidadOrganizativa, UnidadOrganizativaAdmin)
+#admin.site.register(UnidadOrganizativa, UnidadOrganizativaAdmin)
 admin.site.register(Curso, CursoAdmin)
 admin.site.register(NivelDeMaestria)
 admin.site.register(RutaAprendizaje)

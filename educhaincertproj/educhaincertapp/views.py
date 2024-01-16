@@ -28,7 +28,7 @@ def login_view(request):
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
-def descargar_archivo(id_microcredencial):
+def descargar_archivo(request, id_microcredencial):
     microcredencial = Microcredencial.objects.get(id=id_microcredencial)
     comando = subprocess.run(['ipfs', 'cat', microcredencial.ipfs_hash], stdout=subprocess.PIPE)
     response = HttpResponse(comando.stdout, content_type='application/octet-stream')

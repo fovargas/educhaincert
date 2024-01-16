@@ -146,7 +146,7 @@ class EthereumRPCProvider(object):
 
     def broadcast_tx(self, tx):
         logging.info('Broadcasting transaction with EthereumRPCProvider')
-        response = self.w3.eth.sendRawTransaction(tx).hex()
+        response = self.w3.eth.send_raw_transaction(tx).hex()
         return response
 
     def get_balance(self, address):
@@ -163,7 +163,7 @@ class EthereumRPCProvider(object):
         Necessary for the transaction creation.
         """
         logging.info('Fetching nonce with EthereumRPCProvider')
-        response = self.w3.eth.getTransactionCount(address, "pending")
+        response = self.w3.eth.get_transaction_count(address, "pending")
         return response
 
 
@@ -182,7 +182,7 @@ class EtherscanBroadcaster(object):
     def broadcast_tx(self, tx):
         tx_hex = tx
 
-        broadcast_url = self.base_url + '?module=proxy&action=eth_sendRawTransaction'
+        broadcast_url = self.base_url + '?module=proxy&action=eth_send_raw_transaction'
         if self.api_token:
             broadcast_url += '&apikey=%s' % self.api_token
         response = self.send_request('POST', broadcast_url, {'hex': tx_hex})
@@ -222,7 +222,7 @@ class EtherscanBroadcaster(object):
         Looks up the address nonce of this address
         Neccesary for the transaction creation
         """
-        broadcast_url = self.base_url + '?module=proxy&action=eth_getTransactionCount'
+        broadcast_url = self.base_url + '?module=proxy&action=eth_get_transaction_count'
         broadcast_url += '&address=%s' % address
         broadcast_url += '&tag=pending' # Valid tags are 'earliest', 'latest', and 'pending', the last of which includes both pending and committed transactions.
         if self.api_token:
@@ -247,7 +247,7 @@ class MyEtherWalletBroadcaster(object):
     def broadcast_tx(self, tx):
         data = {
             "jsonrpc": "2.0",
-            "method": "eth_sendRawTransaction",
+            "method": "eth_send_raw_transaction",
             "params": ["0x" + tx],
             "id": 1
         }
@@ -290,7 +290,7 @@ class MyEtherWalletBroadcaster(object):
 
         data = {
             "jsonrpc": "2.0",
-            "method": "eth_getTransactionCount",
+            "method": "eth_get_transaction_count",
             "params": [address, "pending"],
             "id": 1
         }
