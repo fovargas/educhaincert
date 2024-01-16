@@ -10,7 +10,7 @@ import json
 import os
 import uuid
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 import mysql.connector
 from mysql.connector import Error
@@ -58,9 +58,11 @@ def instantiate_recipient(cert, recipient, additional_fields):
             raise Exception(
                 'there are fields that are not expected by the additional_per_recipient_fields configuration')
 
+def create_iso8601_tz():
+    return datetime.now(timezone.utc).isoformat()[:-13]+'Z'
 
 def create_unsigned_certificates_from_roster(template, recipients, use_identities, additionalFields, display_html):
-    issued_on = helpers.create_iso8601_tz()
+    issued_on = create_iso8601_tz()
 
     cert_list = []
     for recipient in recipients:
@@ -180,7 +182,6 @@ db_config = {
 
 def instantiate_batch(config):
     recipients = get_recipients_from_database(config, db_config)
-    print(recipients)
     template = ic.get_template(config)
     use_identities = config.filename_format == "certname_identity"
     cert_list = create_unsigned_certificates_from_roster(template, recipients, use_identities, config.additional_per_recipient_fields, config.display_html)
