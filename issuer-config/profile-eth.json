@@ -9,10 +9,10 @@
     "name": "Universidad Técnica Particular de Loja",
     "url": "https://www.utpl.edu.ec",
     "introductionURL": "https://www.utpl.edu.ec",
-    "revocationList": "https://raw.githubusercontent.com/fovargas/educhaincert/main/issuer-config/revocation-list.json",
+    "revocationList": "https://raw.githubusercontent.com/fovargas/educhaincert/main/issuer-config/revocation-list-eth.json",
     "publicKey": [
       {
-        "id": "ecdsa-koblitz-pubkey:0xB657D6C609C210B201928490AD29Dec8ce155483",
+        "id": "ecdsa-koblitz-pubkey:0x37dc6c0B5457f8f23bCE1f31C918Fc709EF7BD55",
         "created": "2017-06-29T14:48:03.814936+00:00"
       }
     ],
