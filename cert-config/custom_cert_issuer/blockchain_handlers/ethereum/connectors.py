@@ -75,6 +75,8 @@ class EthereumServiceProviderConnector(ServiceProviderConnector):
         sep_provider_list.append(EtherscanBroadcaster('https://api-sepolia.etherscan.io/api', etherscan_api_token))
         self.connectors[Chain.ethereum_sepolia] = sep_provider_list
 
+        logging.info('SEP PROVIDER_LIST=%s', sep_provider_list)
+
     def get_providers_for_chain(self, chain, local_node=False):
         return self.connectors[chain]
 
@@ -111,6 +113,7 @@ class EthereumServiceProviderConnector(ServiceProviderConnector):
                 try:
                     logging.debug('m=%s', m)
                     txid = m.broadcast_tx(tx)
+                    logging.info('Broadcasting aqui -------------')
                     if (txid):
                         logging.info('Broadcasting succeeded with method_provider=%s, txid=%s', str(m), txid)
                         if final_tx_id and final_tx_id != txid:
@@ -147,6 +150,7 @@ class EthereumRPCProvider(object):
     def broadcast_tx(self, tx):
         logging.info('Broadcasting transaction with EthereumRPCProvider')
         response = self.w3.eth.sendRawTransaction(tx).hex()
+        print(response)
         return response
 
     def get_balance(self, address):
@@ -164,6 +168,7 @@ class EthereumRPCProvider(object):
         """
         logging.info('Fetching nonce with EthereumRPCProvider')
         response = self.w3.eth.getTransactionCount(address, "pending")
+        logging.info(response)
         return response
 
 
@@ -177,15 +182,20 @@ class EtherscanBroadcaster(object):
             'User-Agent': 'Python-urllib/3.8'
         }
         response = requests.request(method, url, data=data, headers=headers)
+        print(response)
         return response
 
     def broadcast_tx(self, tx):
+        logging.info("BROADCASTING ETHERSCAN ----------")
         tx_hex = tx
 
         broadcast_url = self.base_url + '?module=proxy&action=eth_sendRawTransaction'
+        logging.info("BU: %s",broadcast_url)
         if self.api_token:
             broadcast_url += '&apikey=%s' % self.api_token
         response = self.send_request('POST', broadcast_url, {'hex': tx_hex})
+        
+        logging.info("RE: %s",response)
         if 'error' in response.json():
             logging.error("Etherscan returned an error: %s", response.json()['error'])
             raise BroadcastError(response.json()['error'])
