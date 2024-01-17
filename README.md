@@ -21,13 +21,21 @@ Las siguientes librerías de Python se han utilizado en este proyecto:
 ### Generar una Plantilla de Certificados
 
 ```bash
-create-certificate-template --my-config conf-cert-tools.ini
+python3 create_template.py --my-config conf-cert-tools.ini
+```
+
+```bash
+python3 create_template.py --my-config conf-cert-tools-eth.ini
 ```
 
 ### Crear Certificados sin Firmar a partir de un archivo roster (CSV):
 
 ```bash
-instantiate-certificate-batch -c conf-cert-tools.ini
+python3 instantiate_certificate.py --my-config conf-cert-tools.ini
+```
+
+```bash
+python3 instantiate_certificate.py --my-config conf-cert-tools-eth.ini
 ```
 
 ### Firmar Lotes de Certificados
@@ -35,6 +43,10 @@ instantiate-certificate-batch -c conf-cert-tools.ini
 Para certificados ubicados en projectpath/cert-config/data/unsigned_certificates
 
 ```bash
-cert-issuer -c conf-cert-issuer.ini
+python3 custom_cert_issuer/main.py --my-config conf-cert-issuer.ini
+```
+
+```bash
+python3 custom_cert_issuer/main.py --my-config conf-cert-issuer-eth.ini
 ```
 
