@@ -61,7 +61,7 @@ def instantiate_recipient(cert, recipient, additional_fields):
 def create_iso8601_tz():
     return datetime.now(timezone.utc).isoformat()[:-13]+'Z'
 
-def create_unsigned_certificates_from_roster(template, recipients, use_identities, additionalFields, display_html):
+def create_unsigned_certificates(template, recipients, use_identities, additionalFields, display_html):
     issued_on = create_iso8601_tz()
 
     cert_list = []
@@ -184,7 +184,7 @@ def instantiate_batch(config):
     recipients = get_recipients_from_database(config, db_config)
     template = ic.get_template(config)
     use_identities = config.filename_format == "certname_identity"
-    cert_list = create_unsigned_certificates_from_roster(template, recipients, use_identities, config.additional_per_recipient_fields, config.display_html)
+    cert_list = create_unsigned_certificates(template, recipients, use_identities, config.additional_per_recipient_fields, config.display_html)
     output_dir = os.path.join(config.abs_data_dir, config.unsigned_certificates_dir)
     print('Writing certificates to ' + output_dir)
 

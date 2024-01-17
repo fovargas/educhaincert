@@ -4,9 +4,9 @@ from web3 import Web3
 from eth_utils import to_hex, remove_0x_prefix
 
 from cert_issuer.errors import InsufficientFundsError
-from cert_issuer.blockchain_handlers.ethereum import tx_utils
+from . import tx_utils
 from cert_issuer.models import TransactionHandler
-from cert_issuer.signer import FinalizableSigner
+from .master_signer import FinalizableSigner
 
 
 # as the transaction format in Ethereum is different, the abstracted TransactionCreator doesn't satisfy

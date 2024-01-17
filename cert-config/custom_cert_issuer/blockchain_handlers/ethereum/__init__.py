@@ -3,13 +3,13 @@ import os
 
 from cert_core import UnknownChainError
 
-from cert_issuer.certificate_handlers import CertificateBatchHandler, CertificateV3Handler
+from certificate_handlers import CertificateBatchHandler, CertificateV3Handler
 from .connectors import EthereumServiceProviderConnector
-from cert_issuer.blockchain_handlers.ethereum.signer import EthereumSigner
+from .signer import EthereumSigner
 from .transaction_handlers import EthereumTransactionHandler
 from cert_issuer.merkle_tree_generator import MerkleTreeGenerator
 from cert_issuer.models import MockTransactionHandler
-from cert_issuer.signer import FileSecretManager
+from .master_signer import FileSecretManager
 
 ONE_BILLION = 1000000000
 
