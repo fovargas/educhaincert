@@ -14,7 +14,7 @@ def generar_certificados_sin_firmar(request):
 
     if valor.isdigit():
         os.chdir(settings.CERT_CONFIG_DIR)
-        config_tools_file = settings.CERT_CONFIG_DIR / 'conf-cert-tools.ini'
+        config_tools_file = settings.CERT_CONFIG_DIR / 'conf-cert-tools-eth.ini'
         comando = "python3 instantiate_certificate.py --my-config "+str(config_tools_file)+" --oferta_academica '"+valor+"'"
         subprocess.run(comando, shell=True, capture_output=True, text=True, cwd = os.getcwd())
     
@@ -57,10 +57,10 @@ def actualizar_registro(microcredencial, ipfs_hash):
 
 def procesar_archivos():
     os.chdir(settings.CERT_CONFIG_DIR/'custom_cert_issuer')
-    conf_issuer_file = settings.CERT_CONFIG_DIR / 'conf-cert-issuer.ini'
+    conf_issuer_file = settings.CERT_CONFIG_DIR / 'conf-cert-issuer-eth.ini'
     unsigned_certificates_dir = settings.CERT_CONFIG_DIR/'data'/'preprocessing_certificates'
     blockchain_certificates_dir = settings.CERT_CONFIG_DIR/'data'/'blockchain_certificates'
-    key_file = settings.CERT_CONFIG_DIR / 'pk_issuer.txt'
+    key_file = settings.CERT_CONFIG_DIR / 'pk_issuer_eth.txt'
     work_dir = settings.CERT_CONFIG_DIR / 'data'/'work'
 
     comando = "python3 main.py -c " + str(conf_issuer_file) + " --unsigned_certificates_dir=" + str(unsigned_certificates_dir) + " --blockchain_certificates_dir=" + str(blockchain_certificates_dir) + " --key_file=" + str(key_file) + " --work_dir=" + str(work_dir)
@@ -181,6 +181,7 @@ class UnidadOrganizativaAdmin(admin.ModelAdmin):
 
 class EstudianteAdmin(admin.ModelAdmin):
     readonly_fields = ['did']
+    ordering = ['nombre']
 
 class MicrocredencialAdmin(admin.ModelAdmin):
     def mostrar_microcredenciales(self, obj):

@@ -11,8 +11,8 @@ El proyecto está desarrollado en **Python**, un lenguaje de programación vers�
 Las siguientes librerías de Python se han utilizado en este proyecto:
 
 - **Django**: Un framework de alto nivel para el desarrollo web.
-- **Cert-tools**: Herramientas para crear plantillas de certificados.
-- **Cert-Issuer**: Para emitir certificados en la blockchain.
+- **Cert-tools**: Herramientas para crear plantillas de certificados y generar certificados sin firmar.
+- **Cert-Issuer**: Para firmar certificados en la cadena de bloques.
 - **Veramo**: Facilita la interacción con identidades y verificaciones descentralizadas.
 - **IPFS (InterPlanetary File System)**: Un protocolo y red de pares para almacenar y compartir datos en un sistema de archivos distribuido.
 
@@ -28,7 +28,7 @@ python3 create_template.py --my-config conf-cert-tools.ini
 python3 create_template.py --my-config conf-cert-tools-eth.ini
 ```
 
-### Crear Certificados sin Firmar a partir de un archivo roster (CSV):
+### Crear Certificados sin Firmar a partir de una fuente de datos
 
 ```bash
 python3 instantiate_certificate.py --my-config conf-cert-tools.ini

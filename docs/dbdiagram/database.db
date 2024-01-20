@@ -1,0 +1,101 @@
+Table "educhaincertapp_curso" {
+  "id" int [not null]
+  "nombre" varchar(255) [not null]
+  "nivel_maestria_id" int [not null]
+  "unidad_organizativa_id" int [not null]
+  "ruta_aprendizaje_id" int [not null]
+}
+
+Table "educhaincertapp_estudiante" {
+  "id" int [pk, not null]
+  "nombre" varchar(255) [not null]
+  "email" varchar(254) [not null]
+  "identificacion" varchar(255) [not null]
+  "did" varchar(255) [default: NULL]
+}
+
+Table "educhaincertapp_instructor" {
+  "id" int [pk, not null]
+  "nombre" varchar(255) [not null]
+  "email" varchar(254) [not null]
+  "identificacion" varchar(255) [not null]
+  "did" varchar(255) [default: NULL]
+}
+
+Table "educhaincertapp_microcredencial" {
+  "id" int [pk, not null]
+  "fecha_emision" datetime(6) [default: NULL]
+  "participacion_curso_id" int [not null]
+  "estado" varchar(255) [default: NULL]
+  "ipfs_hash" varchar(255) [default: NULL]
+  "uuid" varchar(255) [default: NULL]
+  "fecha_firma" datetime(6) [default: NULL]
+}
+
+Table "educhaincertapp_niveldemaestria" {
+  "id" int [pk, not null]
+  "nombre" varchar(255) [not null]
+}
+
+Table "educhaincertapp_ofertaacademica" {
+  "id" int [pk, not null]
+  "fecha_inicio" date [not null]
+  "fecha_fin" date [not null]
+  "periodo" varchar(255) [not null]
+  "curso_id" int [not null]
+  "instructor_id" int [not null]
+}
+
+Table "educhaincertapp_participacioncurso" {
+  "id" int [pk, not null]
+  "calificacion" double [default: NULL]
+  "estado" varchar(255) [default: NULL]
+  "estudiante_id" int [not null]
+  "oferta_academica_id" int [not null]
+}
+
+Table "educhaincertapp_rutaaprendizaje" {
+  "id" int [pk, not null]
+  "nombre" varchar(255) [not null]
+  "descripcion" longtext [not null, default: `_utf8mb3'1'`]
+}
+
+Table "educhaincertapp_unidadorganizativa" {
+  "id" int [pk, not null]
+  "nombre" varchar(255) [not null]
+  "did" varchar(255) [default: NULL]
+  "universidad_id" int [not null]
+}
+
+Table "educhaincertapp_universidad" {
+  "id" int [pk, not null]
+  "nombre" varchar(255) [not null]
+  "did" varchar(255) [default: NULL]
+  "logo" varchar(100) [not null]
+}
+
+Table "educhaincertapp_resultadoaprendizaje" {
+  "id" int [pk, not null]
+  "nombre" varchar(255) [not null]
+  "curso_id" int [not null]
+}
+
+Ref:"educhaincertapp_participacioncurso"."id" < "educhaincertapp_microcredencial"."participacion_curso_id"
+
+Ref:"educhaincertapp_universidad"."id" < "educhaincertapp_unidadorganizativa"."universidad_id"
+
+Ref:"educhaincertapp_unidadorganizativa"."id" < "educhaincertapp_curso"."unidad_organizativa_id"
+
+Ref:"educhaincertapp_niveldemaestria"."id" < "educhaincertapp_curso"."nivel_maestria_id"
+
+Ref:"educhaincertapp_curso"."id" < "educhaincertapp_resultadoaprendizaje"."curso_id"
+
+Ref:"educhaincertapp_curso"."id" < "educhaincertapp_ofertaacademica"."curso_id"
+
+Ref:"educhaincertapp_estudiante"."id" < "educhaincertapp_participacioncurso"."estudiante_id"
+
+Ref:"educhaincertapp_rutaaprendizaje"."id" < "educhaincertapp_curso"."ruta_aprendizaje_id"
+
+Ref:"educhaincertapp_instructor"."id" < "educhaincertapp_ofertaacademica"."instructor_id"
+
+Ref:"educhaincertapp_ofertaacademica"."id" < "educhaincertapp_participacioncurso"."oferta_academica_id"
